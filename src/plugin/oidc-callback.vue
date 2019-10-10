@@ -6,9 +6,15 @@
 
 <script>
 export default {
-  name: 'do-cb'
+  name: 'do-cb',
+  created () {
+    this.$usermanager.signinRedirectCallback()
+      .then(user => {
+        this.$userinfo = user
+      })
+      .catch(err => {
+        console.error(err)
+      })
+  }
 }
 </script>
-
-<style>
-</style>
