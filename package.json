@@ -1,13 +1,13 @@
 {
   "name": "@docimax/oidc",
-  "version": "0.0.37",
+  "version": "0.1.11",
   "description": "docimax oidc plugin for vue.js",
   "author": "bei <liub@docimax.com.cn>",
   "private": false,
   "main": "dist/oidc.js",
   "scripts": {
-    "dist": "webpack --config build/webpack.dist.config.js",
-    "pub": "npm publish --access public"
+    "b": "webpack --config build/webpack.dist.config.js",
+    "p": "npm publish --access public"
   },
   "dependencies": {
     "vue": "^2.5.2"
