@@ -6,23 +6,12 @@ An oidc-client application for docimax.
 
 ```
 npm i @docimax/oidc
+npm i axios postcss-import postcss-loader postcss-url -D
 ```
 
-## import
+## 配置文件
 
-main.js/index.js
-
-```
-import auth from './auth'
-import dxoidc from '@docimax/oidc'
-
-Vue.user(dxoidc, auth)
-router.addRoutes(Vue.prototype.$oidcCallback) // 添加 oidc-callback 路由
-```
-
-## auth.js
-
-在 `src` 目录下新建一个 `auth.js` 文件，具体配置需要自己修改：
+在 `src/` 目录下新建一个用于 oidc 的配置文件，内容如下（请按需修改）：
 
 ```js
 export default {
@@ -57,4 +46,52 @@ export default {
   // wouldn't care about them or want them taking up space
   filterProtocolClaims: false,
 };
+```
+
+## src/main.js(或 index.js)
+
+> 注意：axios 也是必要的
+
+```js
+import Vue from 'vue';
+import App from './App.vue';
+import router from './router';
+import store from './store';
+import { oidcInstance } from '@docimax/oidc';
+
+import axios from 'axios';
+
+import auth from './auth';
+
+Vue.config.productionTip = false;
+Vue.prototype.$axios = axios;
+Vue.use(oidcInstance, { oidcConf: auth, router, store });
+
+new Vue({
+  router,
+  store,
+  render: h => h(App),
+}).$mount('#app');
+```
+
+## src/router.js
+
+```js
+router.beforeEach((to, from, next) => {
+  if (to.name === 'oidc-callback') {
+    next();
+  } else {
+    oidcGuard(Vue, Store, next);
+  }
+});
+```
+
+## 获取 userinfo
+
+直接使用 getUserinfo 即可
+
+```js
+computed: {
+  ...mapGetters("docimax", ["getUserinfo"])
+}
 ```

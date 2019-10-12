@@ -1,6 +1,6 @@
 {
   "name": "@docimax/oidc",
-  "version": "0.1.11",
+  "version": "0.1.2",
   "description": "docimax oidc plugin for vue.js",
   "author": "bei <liub@docimax.com.cn>",
   "private": false,
@@ -10,7 +10,11 @@
     "p": "npm publish --access public"
   },
   "dependencies": {
-    "vue": "^2.5.2"
+    "vue": "^2.5.2",
+    "oidc-client": "^1.9.1",
+    "postcss-import": "^11.0.0",
+    "postcss-loader": "^2.0.8",
+    "postcss-url": "^7.2.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
