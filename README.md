@@ -77,6 +77,10 @@ new Vue({
 ## src/router.js
 
 ```js
+// ...
+import { oidcGuard } from '@docimax/oidc/src/service/oidc-route';
+
+// ...
 router.beforeEach((to, from, next) => {
   if (to.name === 'oidc-callback') {
     next();

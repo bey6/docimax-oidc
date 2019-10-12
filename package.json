@@ -5,6 +5,10 @@
   "author": "bei <liub@docimax.com.cn>",
   "private": false,
   "main": "dist/oidc.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bey6/docimax-oidc"
+  },
   "scripts": {
     "b": "webpack --config build/webpack.dist.config.js",
     "p": "npm publish --access public"
