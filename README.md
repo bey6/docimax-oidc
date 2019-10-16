@@ -11,7 +11,9 @@ npm i axios postcss-import postcss-loader postcss-url -D
 
 ## 配置文件
 
-在 `src/` 目录下新建一个用于 oidc 的配置文件，内容如下（请按需修改）：
+在 `src/` 目录下新建一个 `auth.js` 用于 oidc 的配置文件，内容如下（请按需修改）：
+
+auth.js 内容如下：
 
 ```js
 export default {
@@ -76,18 +78,63 @@ new Vue({
 
 ## src/router.js
 
+目前只支持 `history` 模式，请尽量保持配置一致。
+
+另外， oidc-callback 页会被自动添加到项目的路由上，因此如果 router 中包含了 oidc-callback 相关的路由配置，请删除。
+
 ```js
-// ...
+import Vue from 'vue';
+import Router from 'vue-router';
+import Home from './views/Home.vue';
 import { oidcGuard } from '@docimax/oidc/src/service/oidc-route';
 
-// ...
+import store from './store';
+Vue.use(Router);
+
+const router = new Router({
+  mode: 'history',
+  base: process.env.BASE_URL,
+  routes: [
+    {
+      path: '/',
+      name: 'home',
+      component: Home,
+    },
+    {
+      path: '/about',
+      name: 'about',
+      // route level code-splitting
+      // this generates a separate chunk (about.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () =>
+        import(/* webpackChunkName: "about" */ './views/About.vue'),
+    },
+  ],
+});
+
 router.beforeEach((to, from, next) => {
   if (to.name === 'oidc-callback') {
     next();
   } else {
-    oidcGuard(Vue, Store, next);
+    oidcGuard(Vue, store, next);
   }
 });
+
+export default router;
+```
+
+## vue.config.js
+
+67 默认配置有可用的 oidc-client，auth.js 不做任何修改的情况下，需要通过 `4300` 端口启动项目。
+
+vue.config.js
+
+```js
+module.exports = {
+  devServer: {
+    port: 4300,
+  },
+};
 ```
 
 ## 获取 userinfo

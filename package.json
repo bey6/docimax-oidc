@@ -1,7 +1,7 @@
 {
   "name": "@docimax/oidc",
-  "version": "0.1.21",
-  "description": "docimax oidc plugin for vue.js",
+  "version": "0.1.24",
+  "description": "docimax oidc plugin",
   "author": "bei <liub@docimax.com.cn>",
   "private": false,
   "main": "dist/oidc.js",
