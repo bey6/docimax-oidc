@@ -1,7 +1,6 @@
 <template>
   <div class="oidc-callback">
-    <h1>认证成功，即将跳转至应用首页</h1>
-    <pre>{{claim}}</pre>
+    <h3>认证成功，正在跳转···</h3>
   </div>
 </template>
 
@@ -37,8 +36,14 @@ export default {
 <style scoped>
 .oidc-callback {
   font-family: sans-serif;
+  height: 100%;
+  width: 100%;
 }
-pre {
-  font-size: 12px;
+
+h3 {
+  box-sizing: border-box;
+  color: #3d3d3d;
+  background-color: #fafafa;
+  border-radius: 3px;
 }
 </style>
