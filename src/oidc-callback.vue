@@ -20,10 +20,13 @@ export default {
       if (user.profile.sub === TOOLONG) {
         const res = await this.$axios.get(`${this.$authUrl}/Account/GetPermission/${user.profile.idp.toString().trim()}`);
         this.$store.state.docimax.userinfo = res.User || res.data.User;
+        this.$store.state.docimax.permission = res || res.data;
       } else {
         this.$store.state.docimax.userinfo = JSON.parse(user.profile.sub).User;
+        this.$store.state.docimax.permission = JSON.parse(user.profile.sub);
       }
       window.sessionStorage.setItem('@docimax/oidc:userinfo', JSON.stringify(this.$store.state.docimax.userinfo));
+      window.sessionStorage.setItem('@docimax/oidc:permission', JSON.stringify(this.$store.state.docimax.permission));
       this.$router.push('/');
     } catch (error) {
       console.error(error);
