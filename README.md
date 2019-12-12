@@ -155,6 +155,7 @@ import { oidcSignout } from '@docimax/oidc';
 // ...
 
 function yourFunction() {
-  oidcSignout(); // here
+  // this 对应的是本 spa 所实例化的 vue 对象
+  oidcSignout(this); // here
 }
 ```
