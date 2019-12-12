@@ -1,7 +1,8 @@
-import { oidcRoute } from './service/oidc-route';
-import { createOidcUserManager } from './service/oidc-helpers';
-import OidcStore from './service/oidc-store';
 import pkg from '../package.json';
+
+import { createOidcUserManager, signout } from './service/oidc-helpers';
+import { oidcRoute, oidcGuard as guard } from './service/oidc-route';
+import OidcStore from './service/oidc-store';
 
 // setup
 export const oidcInstance = {
@@ -18,3 +19,9 @@ export const oidcInstance = {
     options.store.registerModule('docimax', OidcStore);
   }
 };
+
+// guard
+export const oidcGuard = guard;
+
+// signout
+export const oidcSignout = signout;

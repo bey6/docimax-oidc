@@ -4,7 +4,7 @@ An oidc-client application for docimax.
 
 ## setup
 
-```
+```bash
 npm i @docimax/oidc
 npm i axios postcss-import postcss-loader postcss-url -D
 ```
@@ -86,7 +86,7 @@ new Vue({
 import Vue from 'vue';
 import Router from 'vue-router';
 import Home from './views/Home.vue';
-import { oidcGuard } from '@docimax/oidc/src/service/oidc-route';
+import { oidcGuard } from '@docimax/oidc';
 
 import store from './store';
 Vue.use(Router);
@@ -144,5 +144,17 @@ module.exports = {
 ```js
 computed: {
   ...mapGetters("docimax", ["getUserinfo"])
+}
+```
+
+## 退出
+
+```js
+import { oidcSignout } from '@docimax/oidc';
+
+// ...
+
+function yourFunction() {
+  oidcSignout(); // here
 }
 ```
